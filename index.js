@@ -1,6 +1,9 @@
 const inquirer = require ('inquirer');
 const fs = require ('fs');
-
+const Shape = require('./lib/shapes');
+const Circle = require('./lib/circle');
+const Square = require('./lib/square');
+const Triangle = require('./lib/triangle');
 
 const promptQ = [
     {
@@ -25,3 +28,20 @@ const promptQ = [
         name: 'textColor'
     }
 ]
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName,data, (err) => {
+        if (err) {
+            return console.log(err);
+        }
+    })
+}
+
+function init() {
+    inquirer.prompt(promptQ).then((data) => {
+        writeToFile('logo.svg', data);
+    })
+
+}
+
+init();
